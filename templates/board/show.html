@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="container my-3">
+    <!-- 질문 -->
+     <!-- message 표시 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <strong>{{ message.tags }}</strong>
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <h2 class="border-bottom py-2">{{ bo.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ bo.content }}</div>
+            <div class="d-flex justify-content-end">
+                {% if bo.modify_date %}
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{ bo.modify_date }}</div>
+                </div>
+                {% endif %}
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">{{ bo.author.username }}</div>
+                    <div>{{ bo.create_date }}</div>
+                </div>
+            </div>
+            <div class="my-3">
+                {% if request.user == bo.author %}
+                <a href="{% url 'board:edit' bo_nm bo.id  %}" 
+                    class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                    data-uri="{% url 'board:delete' bo_nm bo.id  %}">삭제</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+</div>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+{% endblock %}

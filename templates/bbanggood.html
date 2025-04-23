@@ -1,0 +1,74 @@
+{% load static %}
+<ul class="bbang_good">
+    <li>
+        <img src="{% static 'img/main/bbang.png' %}" />
+        <span>빵</span>
+    </li>
+    <li>
+        <img src="{% static 'img/main/thumb.png' %}" />
+        <span>굿</span>
+    </li>
+    <li>
+        <img src="{% static 'img/main/smile.png' %}" />
+        <span>빵</span>
+    </li>
+    <li>
+        <img src="{% static 'img/main/bread.png' %}" />
+        <span>긋</span>
+    </li>
+</ul>
+
+{% block style %}
+<style lang="" scoped>
+.bbang_good { position:absolute; width:100%; }
+.bbang_good li { position:absolute; }
+.bbang_good li:nth-child(1) { top:0; left:0; animation:product 3s infinite ease-in-out 1s; }
+.bbang_good li:nth-child(2) { top:60px; left:200px; animation:product02 3s infinite ease-in-out 1.3s; }
+.bbang_good li:nth-child(3) { top:100px; right:200px; animation:product03 3s infinite ease-in-out 1.6s; }
+.bbang_good li:nth-child(4) { top:56px; right:12px; animation:product04 3s infinite ease-in-out 2s; }
+
+
+
+.slide_banner .split_link .product.pd01 { top:80px; right:420px; animation:product 3s infinite ease-in-out 1s; }
+.slide_banner .split_link .product.pd02 { top:70px; left:395px;  animation:product 3s infinite ease-in-out 1.3s; }
+
+
+@keyframes product { 0%, 100% { transform: translateX(-30px) rotate(-20deg); }
+                    50% { transform: translateX(30px) rotate(20deg); } }
+@keyframes product02 { 0%, 100% { transform: translate(-20px, -10px) rotate(-10deg); }
+                    50% { transform: translate(40px, 40px) rotate(30deg); } }
+@keyframes product03 { 0%, 100% { transform: translateX(-30px) rotate(-20deg); }
+                    50% { transform: translateX(30px) rotate(20deg); } }
+@keyframes product04 { 0%, 100% { transform: translate(-20px, -10px) rotate(-20deg); }
+                    50% { transform: translate(40px, 10px) rotate(20deg); } }
+     
+
+
+.bbang_good li span { display: block; text-align: center; font-size: 94px; margin-top: 20px; font-weight:bold;
+	animation: text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes text-pop-up-top {
+    0% { transform: translateY(0); transform-origin: 50% 50%; text-shadow: none; }
+    100% { transform: translateY(-50px); transform-origin: 50% 50%; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3); }
+}
+
+
+</style>
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+
+// JavaScript에서 랜덤 값 생성 및 적용
+function updateElementPosition() {
+  const x = Math.random() * 100; // 원하는 범위에 따라 조정
+  const y = Math.random() * 100; // 원하는 범위에 따라 조정
+  const element = document.querySelector('.element');
+  element.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// 일정 시간마다 랜덤 위치 업데이트
+setInterval(updateElementPosition, 1000); // 1초마다 업데이트
+</script>
+{% endblock %}

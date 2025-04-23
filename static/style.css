@@ -1,0 +1,37 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@font-face {
+    font-family: 'Ownglyph_ParkDaHyun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Ownglyph_corncorn-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2412-1@1.0/Ownglyph_corncorn-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: '나눔손글씨 마고체';
+    src: url('./fonts/나눔손글씨 마고체.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body { height:100%; margin:0px; padding:0px; font-family:'나눔손글씨 마고체', 'Ownglyph_corncorn-Rg', 'NanumSquare', Dotum; color: #333; font-size:16px; }
+
+
+.wrap { margin-left:auto; margin-right:auto; max-width:1500px !important; width:100%; position:relative; }
+ul, ol, li, dt, dd { list-style-type:none; margin:0px; padding:0px; }
+a, a:hover { color:#333; text-decoration:none; }
+.cb { clear:both; font-size:0px !important; line-height:0px !important; margin:0px !important; padding:0px !important; height:0px !important; width:0px !important; float:none !important; }
+.clear-both:after { content:"&nbsp;"; display:block; clear:both; visibility:hidden; line-height:0; height:0; }
+
+
+
+.btn-group-xm>.btn,.btn-xm {
+    --bs-btn-padding-y: 0;
+    --bs-btn-padding-x: 0.25rem;
+    --bs-btn-font-size: 0.8em;
+}

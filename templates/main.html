@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load comm_filter %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <div class="slide_banner mod">
+    {% for i in 1|def_range:10 %}
+        <img src="{% static 'img/slide/img0' %}{{i}}.jpg" />
+    {% endfor %}
+    </div>
+    
+    <div class="wrap">
+        <!-- 빵굿 빵긋 -->
+        {% include "bbanggood.html" %}
+
+        <!-- 공지사항 5개 가져오기 -->
+        <div class="mod">
+        {% bo_mini 'notice' %}
+        </div>
+
+        <div class="material_desc mod">
+            <img src="{% static 'img/main/desc01.jpg' %}" />
+            <img src="{% static 'img/main/desc02.jpg' %}" />
+            <img src="{% static 'img/main/desc03.jpg' %}" />
+            <img src="{% static 'img/main/desc04.jpg' %}" />
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.slide_banner').slick({
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
+});
+</script>
+{% endblock %}
+
+{% block style %}
+<style lang="" scoped>
+.main .mod { margin-top:30px; }
+.main .slide_banner img { object-fit:cover; height:300px; border-radius:30px; }
+.main .material_desc { text-align: center; }
+</style>
+{% endblock %}

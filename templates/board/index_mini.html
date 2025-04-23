@@ -1,0 +1,35 @@
+{% load comm_filter %}
+
+<div class="list_mini">
+    <a href="{% url 'board:index' bo_nm %}" class="bo_title">공지사항</a>
+    <ul>
+        {% if bo_list %}
+        {% for bo_li in bo_list %}
+        <li>
+            <a href="{% url 'board:show' bo_nm bo_li.id %}">
+                <span>{{ bo_li.subject }}</span>
+                <span>{{ bo_li.create_date | date_print }}</span>
+            </a>
+        </li>    
+        {% endfor %}
+        {% else %}
+        <li><span>공지가 없습니다.</span></li>
+        {% endif %}
+    </ul>
+
+    {% if user.is_superuser %}
+    <a href="{% url 'board:create' bo_nm %}" class="btn btn-outline-info btn-xm btn_write">글쓰기</a>
+    {% endif %}
+</div>
+
+{% block style %}
+<style lang="" scoped>
+.list_mini { max-width:600px; margin:auto; position:relative; }
+.list_mini .bo_title { display:block; font-size:20px; text-align:center; font-weight:bold; background: #666; color: #FFF; padding:10px 0; line-height:1; }
+.list_mini ul li { background-color: #292D3E; border: 1px solid #1D9AF2; border-radius: 4px; padding: 3px 10px; margin:3px 0; cursor: pointer; transition: all 0.2s ease-in-out; }
+.list_mini ul li:hover { box-shadow: 1px 1px #53a7ea, 2px 2px #53a7ea, 3px 3px #53a7ea; transform: translateX(-3px); }
+.list_mini ul li a span { color:#a6daff; font-size:28px; }
+.list_mini ul li a span:last-child { float:right; }
+.list_mini .btn_write { position:absolute; right:15px; top:10px; }
+</style>
+{% endblock %}

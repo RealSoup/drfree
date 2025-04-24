@@ -1,0 +1,58 @@
+{% load static %}
+
+<footer>
+    <div class="footer_info">
+        <div class="wrap row">
+            <div class="col-4"><img src="{% static 'img/common/logo_753.png' %}" /></div>
+            <dl class="col-4">
+                <dt>동림자유발도르프학교에 오시는길</dt>
+                <dd>
+                    <span>학교 주소:</span>
+                    <span>경기도 용인시 처인구 모현읍 포은대로 1272번길 79</span>
+                </dd>
+                <dd>
+                    <span></span>
+                    <span>(구주소: 모현읍 동림리 산12번지)</span>
+                </dd>
+                <dd>
+                    <span>대표 전화:</span>
+                    <span>031-334-8345</span>
+                </dd>
+                <dd>
+                    <span>팩스:</span>
+                    <span>031-338-8346</span>
+                </dd>
+                <dd>
+                    <span>이메일:</span>
+                    <span>admin@drfreeschool.kr</span>
+                </dd>
+                <dd class="d-grid mt-4"><a href="{% url 'page:p03' %}" class="btn btn-dark">오시는 길</a></dd>
+            </dl>
+
+            <dl class="col-4">
+                <dt>동림자유발도르프학교의 이념</dt>
+                <dd>1.동림자유발도르프학교는 발도르프교육을 실천하고자 합니다.</dd>
+                <dd>2.아이들에게 스스로 성장할 수 있는 시간과 공간을 제공하고자 합니다.</dd>
+                <dd>3.두려움 없이 배우고 자신있게 살아가는 삶을 추구합니다.</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="wrap">© Copyright 2017 Dongrim Free School All Rights Reserved</div>
+    </div>
+    
+</footer>
+
+
+{% block style %}
+<style type="text/css">
+footer { margin-top:100px; }
+footer .footer_info { background-color:#afafaf; color:#999; padding:50px 0; }
+footer .footer_info .row div img { width:100%; }
+footer .footer_info dl dt { color:#fff; }
+footer .footer_info dl dd { color:#565656; }
+footer .footer_info dl dd span:first-child { display:inline-block; width:70px; }
+
+footer .copyright { background-color:#333; color:#999; padding:10px 0; }
+</style>
+{% endblock %}

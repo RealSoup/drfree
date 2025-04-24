@@ -1,0 +1,93 @@
+{% load static %}
+
+<header class="wrap">
+    <ul class="top_menu">
+        <li class="nav-item">
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+            {% else %}
+            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+            {% endif %}
+        </li>
+        <!-- <li>
+            {% if not user.is_authenticated %}
+            <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+            {% endif %}
+        </li> -->
+    </ul>
+
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand logo" href="{% url 'main' %}">
+                <img src="{% static 'img/common/logo_151.png' %}" />
+            </a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">학교소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p02' %}">학교 조직 소개</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p03' %}">오시는 길</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p04' %}">동림 조직도</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p05' %}">연혁 및 현황</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p06' %}">교육철학</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page:p07' %}">교사소개</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">교육과정</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">입학안내</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">자료실</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">동림가족전용</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'page:p01' %}">학교 이념</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">동림문화예술협동조합</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{% block style %}
+<style type="text/css">
+header .top_menu { text-align:right; }
+header .top_menu li { display:inline-block; }
+header nav { background-color:#FFFFFF33; }
+
+</style>
+{% endblock %}

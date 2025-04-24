@@ -35,7 +35,12 @@ def date_print(v, arg=None):
         else:
             rst = v.strftime('%y-%m-%d')
         return rst
-    
+
+@register.simple_tag(takes_context=True)
+def img_h(context, v):
+    if context['request'].user_agent.is_mobile:       
+        v = 100
+    return v
     
 @register.inclusion_tag('board/index_mini.html', takes_context=True)
 def bo_mini(context, bo_nm):

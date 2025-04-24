@@ -4,37 +4,101 @@
 
 {% block content %}
 <div class="main">
-    <div class="slide_banner mod">
-    {% for i in 1|def_range:10 %}
-        <img src="{% static 'img/slide/img0' %}{{i}}.jpg" />
+    <div class="slide_banner">
+    {% for i in 1|def_range:4 %}
+        <img src="{% static 'img/main/slide0' %}{{i}}.png" />
     {% endfor %}
     </div>
-    
-    <div class="wrap">
+
+    <div class="wrap container">
         <!-- 빵굿 빵긋 -->
-        {% include "bbanggood.html" %}
+        {# % include "bbanggood.html" % #}
 
-        <!-- 공지사항 5개 가져오기 -->
-        <div class="mod">
-        {% bo_mini 'notice' %}
+        <div class="row">
+            <!-- 공지사항 5개 가져오기 -->
+            <div class="col">{% bo_mini 'notice' %}</div>
+            
+            <!-- 블로그 3개 -->
+            <div class="col blog">
+                <h3>블로그</h3>
+                <div class="row">
+                    <a href="https://m.blog.naver.com/dongrimfreeschool/223841863697" class="col-4" target="_blank">
+                        <img src="{% static 'img/main/blog01.jpg' %}" />
+                        <p>새로운 눈으로 보는 조선의 궁권과 종묘</p>
+                    </a>
+                    <a href="https://blog.naver.com/dongrimfreeschool/223505337242" class="col-4" target="_blank">
+                        <img src="{% static 'img/main/blog02.png' %}" />
+                        <p>모험과 배움으로 가득한 고대 올림피아드</p>
+                    </a>
+                    <a href="https://blog.naver.com/dongrimfreeschool/223449798628" class="col-4" target="_blank">
+                        <img src="{% static 'img/main/blog03.jpg' %}" />
+                        <p>7학년- 섬진강 도보 여행</p>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="material_desc mod">
-            <img src="{% static 'img/main/desc01.jpg' %}" />
-            <img src="{% static 'img/main/desc02.jpg' %}" />
-            <img src="{% static 'img/main/desc03.jpg' %}" />
-            <img src="{% static 'img/main/desc04.jpg' %}" />
+  
+        <div class="row shortcut">
+            <a href="https://m.blog.naver.com/dongrimfreeschool/223841863697" class="col-4" target="_blank">
+                <img src="{% static 'img/main/baro01.jpg' %}" />
+            </a>
+            <a href="https://www.youtube.com/@dongrimfreeschool" class="col-4" target="_blank">
+                <img src="{% static 'img/main/baro02.png' %}" />
+            </a>
+            <a href="https://www.waldorfedu.kr" class="col-4" target="_blank">
+                <img src="{% static 'img/main/baro03.png' %}" />
+            </a>
         </div>
+        
+        <div class="row youtube">
+            <a href="https://youtu.be/j-0OB_uQZnc" class="col-4">
+                <img src="{% static 'img/main/yt01.jpg' %}" />
+            </a>
+            <a href="https://youtu.be/jkxIMRS6TVE" class="col-4">
+                <img src="{% static 'img/main/yt02.png' %}" />
+            </a>
+            <a href="https://youtu.be/CqpqMPMByxw" class="col-4">
+                <img src="{% static 'img/main/yt03.jpg' %}" />
+            </a>
+        </div>
+
+        
+
+
+
+
+
+
     </div>
+
 
 </div>
 {% endblock %}
 
+{% block style %}
+<style type="text/css">
+.main .mod { margin-top:30px; }
+.main .slide_banner img { object-fit:cover; height:{% img_h 500 %}px; border-radius:30px; }
+.main .container>.row { margin-top:20px; }
+.main .container .row .blog  h3 { font-size:16px; text-align:center; font-weight:bold; padding:10px 0; line-height:1; margin:0; }
+.main .container .row .blog .row a img { width:100%; margin-bottom:10px; }
+.main .container .row .blog .row a p { font-size:12px; text-align:center; }
+.main .container .shortcut a { text-align:center; }
+.main .container .youtube a img { width:100%; object-fit:cover; height:250px; }
+
+</style>
+{% endblock %}
+
 {% block script %}
 <script type="text/javascript">
+let slide_cnt = 1;
+if (is_mobile)
+    slide_cnt = 1;
+
 $(document).ready(function(){
     $('.slide_banner').slick({
-        slidesToShow: 5,
+        slidesToShow: slide_cnt,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
@@ -43,10 +107,3 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 
-{% block style %}
-<style lang="" scoped>
-.main .mod { margin-top:30px; }
-.main .slide_banner img { object-fit:cover; height:300px; border-radius:30px; }
-.main .material_desc { text-align: center; }
-</style>
-{% endblock %}

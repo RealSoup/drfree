@@ -15,4 +15,8 @@ urlpatterns = [
     path('p21/', views.p21, name='p21'),
     path('p22/', views.p22, name='p22'),
     path('p23/', views.p23, name='p23'),
+    
+    path('p31/', views.p31, name='p31'),
+    path('p32/', views.p32, name='p32'),
+    path('p33/', views.p33, name='p33'),
 ]

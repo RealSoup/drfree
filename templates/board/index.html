@@ -1,9 +1,27 @@
 {% extends 'layout.html' %}
 {% load bo_filter %}
+{% load static %}
+
+
+
 {% block content %}
 
 <div class="container my-3">
-    {{t}}
+    <div class="row my-3">
+        <h2 class="my-3 border-bottom pb-2">{{ bo_info.title }} 게시판</h2>
+        <div class="col-6">
+            <a href="{% url 'board:create' bo_nm %}" class="btn btn-outline-secondary">글쓰기</a>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class="table">
         <thead>
         <tr class="text-center table-dark">
@@ -22,18 +40,25 @@
                 {{ bo_list.paginator.count|sub:bo_list.start_index|sub:forloop.counter0|add:1 }}
             </td>
             <td class="text-start">
-                <a href="{% url 'board:show' bo_nm list.id %}">{{ list.subject }}</a>
-                {% if list.answer_set.count > 0 %}
-                <span class="text-danger small mx-2">{{ list.answer_set.count }}</span>
+                <a href="{% url 'board:show' bo_nm list.id %}"
+                    style="padding-left:{{ list.bo_seq_cd|length|multiply:20 }}px">
+                    {% if list.bo_seq_cd %}
+                    <img src="{% static 'img/board/reply_icon.png' %}" alt="답변글" />
+                    {% endif %}
+                    {{ list.subject }}
+                </a>
+                    
+                {% if list.bo_group > 0 %}
+                <span class="text-danger small mx-2">{{ list.bo_group }}</span>
                 {% endif %}
             </td>
             <td>{{ list.author.username }}</td>  <!-- 글쓴이 추가 -->
-            <td>{{ list.create_date }}</td>
+            <td>{{ list.created_at }}</td>
         </tr>
         {% endfor %}
         {% else %}
         <tr>
-            <td colspan="4">질문이 없습니다.</td>
+            <td colspan="4">게시물이 없습니다.</td>
         </tr>
         {% endif %}
         </tbody>
@@ -44,7 +69,7 @@
         <!-- 이전페이지 -->
         {% if bo_list.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ bo_list.previous_page_number }}">이전</a>
+            <a class="page-link" data-page="{{ bo_list.previous_page_number }}" href="javascript:void(0)">이전</a>
         </li>
         {% else %}
         <li class="page-item disabled">
@@ -56,11 +81,11 @@
         {% if page_number >= bo_list.number|add:-5 and page_number <= bo_list.number|add:5 %}
         {% if page_number == bo_list.number %}
         <li class="page-item active" aria-current="page">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
         </li>
         {% else %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
         </li>
         {% endif %}
         {% endif %}
@@ -68,16 +93,54 @@
         <!-- 다음페이지 -->
         {% if bo_list.has_next %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ bo_list.next_page_number }}">다음</a>
+            <a class="page-link" data-page="{{ bo_list.next_page_number }}" href="javascript:void(0)">다음</a>
         </li>
         {% else %}
         <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">다음</a>
         </li>
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
-
-    <a href="{% url 'board:create' bo_nm %}" class="btn btn-primary">질문 등록하기</a>
 </div>
+<form id="searchForm" method="get" action="{% url 'board:index' bo_nm %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+{% endblock %}
+
+
+{% block script %}
+<script type='text/javascript'>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function (element) {
+        element.addEventListener('click', function () {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function () {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 1; // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        document.getElementById('searchForm').submit();
+    });
+</script>
+{% endblock %}
+
+
+
+{% block style %}
+<style type="text/css">
+.reply-arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid #999;
+    border-bottom: 2px solid #999;
+    transform: rotate(-45deg);
+    margin-right: 4px;
+    margin-left: 10px;
+}
+</style>
 {% endblock %}

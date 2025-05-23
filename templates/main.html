@@ -4,11 +4,12 @@
 
 {% block content %}
 <div class="main">
+    {% if banners %}
     <div id="drf_carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            {% for i in 1|def_range:4 %}
-            <div class="carousel-item{% if i == 1 %} active{% endif %}">
-                <img src="{% static 'img/main/slide0' %}{{i}}.png" />
+            {% for li in banners %}
+            <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                <img src="{{ li.image.url }}" />
             </div>
             {% endfor %}
         </div>
@@ -21,6 +22,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    {% endif %}
 
 
     <div class="wrap container">

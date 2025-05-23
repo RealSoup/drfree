@@ -47,5 +47,5 @@ def bo_mini(context, bo_nm):
     user = context['request'].user
     bo_list = []
     if bo_nm == 'notice':
-        bo_list = Notice.objects.order_by("-create_date")[:5]
+        bo_list = Notice.objects.order_by("-created_at")[:5]
     return {'bo_list': bo_list, 'user':user, 'bo_nm': bo_nm}

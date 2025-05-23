@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% load socialaccount %}
+{% block content %}
+<div class="container login">
+    <h2>로그인</h2>
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"> <!-- 로그인 성공후 이동되는 URL -->
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="username">사용자ID</label>
+            <input type="text" name="login" placeholder="아이디" autocomplete="username" maxlength="150" required=""
+                id="id_login" value="{{ form.username.value|default_if_none:'' }}" />
+            <label for="id_remember">아이디 저장:</label>
+            <input type="checkbox" name="remember" id="id_remember">
+        </div>
+        <div class="mb-3">
+            <label for="password">비밀번호</label>
+            <input type="password" name="password" placeholder="비밀번호" autocomplete="current-password" required=""
+                aria-describedby="id_password_helptext" id="id_password"
+                value="{{ form.password.value|default_if_none:'' }}" />
+            <span class="helptext" id="id_password_helptext"><a href="/accounts/password/reset/">비밀번호를 잊으셨나요?</a></span>
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+
+    
+
+    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <form method="post" action="/accounts/naver/login/?process=login">
+            {% csrf_token %}
+            <button type="submit">네이버 로그인</button>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}
+
+
+{% block style %}
+<style type="text/css">
+.login { max-width:400px; text-align:center; }
+
+   
+</style>
+{% endblock %}

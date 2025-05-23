@@ -1,12 +1,22 @@
 {% load static %}
 
 <header class="wrap">
-    <ul class="top_menu">
+    <ul class="top_menu gap-2">
+        {% if user.is_authenticated and user.is_staff %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <li class="">
+                <a class="btn btn-danger btn-sm" href="/admin">SUPER</a>
+            </li>
+            {% endif %}
+        <li class="me-auto">
+            <a class="btn btn-warning btn-sm" href="/adm/banner">ADMIN</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
             {% else %}
-            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+            <a class="nav-link" href="{% url 'account_login' %}">로그인</a>
             {% endif %}
         </li>
         <!-- <li>
@@ -64,13 +74,19 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">자료실</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'page:p21' %}">학교 이념</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'general' %}">교육 및 일반자료</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'photo' %}">사진 자료</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'video' %}">동영상 자료</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'page:p21' %}">학교 이념</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'notice' %}">공지사항</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'story' %}">학교이야기</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'build' %}">학사건축이야기</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'circle' %}">소모임</a></li>
+                            <li><a class="dropdown-item" href="{% url 'board:index' 'other' %}">외부게시판</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -89,7 +105,7 @@
 </header>
 {% block style %}
 <style type="text/css">
-header .top_menu { text-align:right; }
+header .top_menu { display:flex; justify-content:end; }
 header .top_menu li { display:inline-block; }
 header nav { background-color:#FFFFFF33; }
 

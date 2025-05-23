@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'jquery-ui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <title>동림자유 발도르프학교</title>
+
+    <!-- 자바스크립트 Start -->
+    <script src="{% static 'common.js' %}" type="text/javascript"></script>
+    {% block style %}
+    {% endblock %}
+    <!-- 자바스크립트 End -->
+</head>
+<body>
+    
+{% include "adm/header.html" %}
+
+
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+ 
+<div class="{% if request.resolver_match.url_name != 'main' %}wrap{% endif %}">
+{% block content %}
+{% endblock %}
+</div>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+{% include "footer.html" %}
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'jquery-ui.min.js' %}" type="text/javascript"></script>
+<!-- 자바스크립트 Start -->
+{% block script %}
+{% endblock %}
+<!-- 자바스크립트 End -->
+</body>
+</html>

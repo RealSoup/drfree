@@ -8,7 +8,7 @@
         <li>
             <a href="{% url 'board:show' bo_nm bo_li.id %}">
                 <span>{{ bo_li.subject }}</span>
-                <span>{{ bo_li.create_date | date_print }}</span>
+                <span>{{ bo_li.created_at | date_print }}</span>
             </a>
         </li>    
         {% endfor %}
@@ -17,7 +17,7 @@
         {% endif %}
     </ul>
 
-    {% if user.is_superuser %}
+    {% if user.is_staff %}
     <a href="{% url 'board:create' bo_nm %}" class="btn btn-outline-info btn-xm btn_write">글쓰기</a>
     {% endif %}
 </div>
